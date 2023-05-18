@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: alb
+  name: project-app-nginx
+  namespace: project1
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: project1
+                port:
+                  number: 8080
+            pathType: ImplementationSpecific
+
+
+
