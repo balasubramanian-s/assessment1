@@ -15,17 +15,18 @@ spec:
     spec:
       containers:
         - name: project1
-          image: chentex/go-rest-api
+          image: thomaspoignant/hello-world-rest-json
           ports:
             - name: project1
               containerPort: 8080
           resources:
             requests:
-              cpu: 250m
+              cpu: 100m
               memory: 680Mi
             limits:
               cpu: 600m
               memory: 1800Mi
+      terminationGracePeriodSeconds: 30
 ---
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
@@ -63,6 +64,7 @@ metadata:
 spec:
   ports:
     - port: 8080
+      targetPort: 8080
   selector:
     app: project1
   type: NodePort
